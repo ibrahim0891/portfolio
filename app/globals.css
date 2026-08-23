@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-serif: "Newsreader", "Charter", "Bitstream Charter", Cambria, Georgia, serif;
+    --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+    
+    --background: #F4F3EF;          /* Warm chalk/gesso paper background */
+    --foreground: #282826;          /* Dusty charcoal primary text */
+    --border-hairline: #D8D6D0;     /* Faint chalk-line/gray divider */
+    --surface-card: #FAF9F6;        /* Light plaster surface */
+    --text-primary: #282826;        /* Primary charcoal */
+    --text-secondary: #5C5C59;      /* Secondary slate/dust gray */
+    --text-muted: #92928E;          /* Muted chalky gray */
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F4F3EF;
+  color: #282826;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Thin horizontal separator — used between major sections */
+.section-rule {
+  border: none;
+  border-top: 1px solid #D8D6D0;
+  margin: 0;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10.5pt;
+  }
+  .no-print {
+    display: none !important;
+  }
 }
