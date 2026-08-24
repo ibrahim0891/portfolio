@@ -2,6 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 import { TOKENS } from "./tokens";
+
+const COLOR_SCHEMES = [
+  { name: "Swiss Red",      accent: "#E8422F" },
+  { name: "Safety Orange",  accent: "#E05C1A" },
+  { name: "Deep Cobalt",    accent: "#1D4ED8" },
+  { name: "Forest",         accent: "#15803D" },
+  { name: "Teal",           accent: "#0F766E" },
+  { name: "Warm Purple",    accent: "#7C3AED" },
+  { name: "Terracotta",     accent: "#C2410C" },
+  { name: "Steel Blue",     accent: "#0369A1" },
+  { name: "Crimson",        accent: "#BE123C" },
+  { name: "Olive",          accent: "#4D7C0F" },
+];
+
 export interface ProjectData {
     id: string;
     title: string;
@@ -169,6 +183,7 @@ export default function HomeV2() {
     const [showGridOverlay, setShowGridOverlay] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeImageIndices, setActiveImageIndices] = useState<Record<string, number>>({});
+    const [scheme] = useState(() => COLOR_SCHEMES[Math.floor(Math.random() * COLOR_SCHEMES.length)]);
 
     const nextImage = (projectId: string, total: number) => {
         setActiveImageIndices((prev) => ({
@@ -225,18 +240,22 @@ export default function HomeV2() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-[#F3F2ED] text-[#141414] selection:bg-[#E8422F] selection:text-white font-sans relative overflow-x-hidden pb-24">
+        <div className="w-full min-h-screen bg-[#F3F2ED] text-[#141414] selection:bg-[var(--accent)] selection:text-white font-sans relative overflow-x-hidden pb-24">
+            <style>{`:root { --accent: ${scheme.accent}; }`}</style>
+            <div className="fixed bottom-16 right-6 z-50 text-[10px] font-mono uppercase tracking-[0.1em] text-[#92928E] no-print select-none">
+              {scheme.name}
+            </div>
             {showGridOverlay && (
                 <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-50 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full bg-[#E8422F]/[0.015] border-x border-[#E8422F]/[0.08]" />
+                        <div key={i} className="h-full bg-[var(--accent)]/[0.015] border-x border-[var(--accent)]/[0.08]" />
                     ))}
                 </div>
             )}
 
             <button
                 onClick={() => setShowGridOverlay(!showGridOverlay)}
-                className="fixed bottom-6 right-6 z-50 bg-[#141414] text-[#F3F2ED] hover:bg-[#E8422F] hover:text-white px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] border border-[#141414] transition-colors cursor-pointer no-print font-bold"
+                className="fixed bottom-6 right-6 z-50 bg-[#141414] text-[#F3F2ED] hover:bg-[var(--accent)] hover:text-white px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] border border-[#141414] transition-colors cursor-pointer no-print font-bold"
             >
                 GRID: {showGridOverlay ? "ON" : "OFF"}
             </button>
@@ -251,31 +270,31 @@ export default function HomeV2() {
                     <div className="lg:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-[12px] font-sans font-bold uppercase tracking-[0.1em] text-[#141414] hover:text-[#E8422F] cursor-pointer"
+                            className="text-[12px] font-sans font-bold uppercase tracking-[0.1em] text-[#141414] hover:text-[var(--accent)] cursor-pointer"
                         >
                             {isMenuOpen ? "CLOSE ✕" : "MENU ☰"}
                         </button>
                     </div>
 
                     <nav className="hidden lg:flex lg:col-span-5 items-center justify-start gap-8">
-                        <a href="#work" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[#E8422F] transition-colors">
+                        <a href="#work" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
                             WORK
                         </a>
-                        <a href="#capabilities" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[#E8422F] transition-colors">
+                        <a href="#capabilities" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
                             CAPABILITIES
                         </a>
-                        <a href="#experience" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[#E8422F] transition-colors">
+                        <a href="#experience" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
                             EXPERIENCE
                         </a>
-                        <a href="#contact" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[#E8422F] transition-colors">
+                        <a href="#contact" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
                             CONTACT
                         </a>
                     </nav>
 
                     <div className="hidden lg:flex lg:col-span-4 items-center justify-end gap-6 text-[12px] font-mono text-[#5C5C59] font-variant-numeric[tabular-nums]">
                         <span>DHAKA {dhakaTime}</span>
-                        <span className="inline-flex items-center gap-2 text-[#E8422F] font-bold">
-                            <span className="w-2 h-2 rounded-full bg-[#E8422F] animate-pulse" />
+                        <span className="inline-flex items-center gap-2 text-[var(--accent)] font-bold">
+                            <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
                             AVAILABLE
                         </span>
                     </div>
@@ -287,41 +306,41 @@ export default function HomeV2() {
                             <a
                                 href="#work"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold uppercase tracking-tight text-[#141414] hover:text-[#E8422F] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
-                                <span className="text-[12px] font-mono text-[#E8422F]">01 //</span>
+                                <span className="text-[12px] font-mono text-[var(--accent)]">01 //</span>
                                 WORK
                             </a>
                             <a
                                 href="#capabilities"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold uppercase tracking-tight text-[#141414] hover:text-[#E8422F] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
-                                <span className="text-[12px] font-mono text-[#E8422F]">02 //</span>
+                                <span className="text-[12px] font-mono text-[var(--accent)]">02 //</span>
                                 CAPABILITIES
                             </a>
                             <a
                                 href="#experience"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold uppercase tracking-tight text-[#141414] hover:text-[#E8422F] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
-                                <span className="text-[12px] font-mono text-[#E8422F]">03 //</span>
+                                <span className="text-[12px] font-mono text-[var(--accent)]">03 //</span>
                                 EXPERIENCE
                             </a>
                             <a
                                 href="#contact"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold uppercase tracking-tight text-[#141414] hover:text-[#E8422F] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
-                                <span className="text-[12px] font-mono text-[#E8422F]">04 //</span>
+                                <span className="text-[12px] font-mono text-[var(--accent)]">04 //</span>
                                 CONTACT
                             </a>
                         </nav>
 
                         <div className="pt-6 border-t border-[#141414]/10 flex justify-between items-center text-[11px] font-mono text-[#5C5C59]">
                             <span>DHAKA {dhakaTime}</span>
-                            <span className="inline-flex items-center gap-1.5 text-[#E8422F] font-bold">
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#E8422F] animate-pulse" />
+                            <span className="inline-flex items-center gap-1.5 text-[var(--accent)] font-bold">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
                                 AVAILABLE
                             </span>
                         </div>
@@ -337,7 +356,7 @@ export default function HomeV2() {
 
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-12 md:py-16 lg:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
                     <div className="col-span-12 md:col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             00 // HERO
                         </span>
                         <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-4">
@@ -354,8 +373,8 @@ export default function HomeV2() {
                         <h1 className="text-[56px] sm:text-[72px] md:text-[88px] lg:text-[96px] font-serif leading-[0.9] tracking-[-0.03em] text-[#141414] font-light">
                             Muhammad Ibrahim
                         </h1>
-                        <span className="text-[12px] font-sans uppercase font-bold tracking-[0.15em] text-[#E8422F] mt-6 block">
-                            FULLSTACK WEB DEVELOPER · SM TECHNOLOGY
+                        <span className="text-[12px] font-sans font-bold tracking-[0.06em] text-[var(--accent)] mt-6 block">
+                            Fullstack Web Developer · SM Technology
                         </span>
                         <p className="text-[18px] md:text-[22px] leading-[30px] font-sans text-[#5C5C59] mt-8 max-w-2xl font-light">
                             Building practical, maintainable web applications — from client analysis through production deployment — with Next.js, TypeScript, PostgreSQL, and Express.
@@ -363,19 +382,23 @@ export default function HomeV2() {
 
                         <div className="mt-16 pt-8 border-t border-[#141414]/15 flex flex-wrap gap-x-8 gap-y-4 text-[12px] font-mono text-[#5C5C59]">
                             <div className="flex items-center gap-2">
-                                <span className="text-[#E8422F] font-bold">~1 YR</span> EXPERIENCE
+                                <span className="text-[var(--accent)] font-bold">~1 yr</span> experience
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-[#E8422F] font-bold">02</span> PRODUCTION APPS
+                                <span className="text-[var(--accent)] font-bold">02</span> production apps
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-[#E8422F] font-bold">300+</span> MAU SCALED
+                                <span className="text-[var(--accent)] font-bold">300+</span> MAU scaled
                             </div>
                         </div>
                     </div>
 
                     <div className="col-span-12 md:col-span-4 lg:col-span-4 flex flex-col justify-end mt-8 md:mt-0 gap-2">
-                        <div className="border border-[#d5d5d5] overflow-hidden aspect-[3/4]">
+                        <div className="border border-[#d5d5d5] overflow-hidden aspect-[3/4] relative">
+                            <span className="absolute top-2 left-2 w-6 h-6 border-t border-l border-[var(--accent)] z-10" />
+                            <span className="absolute top-2 right-2 w-6 h-6 border-t border-r border-[var(--accent)] z-10" />
+                            <span className="absolute bottom-2 left-2 w-6 h-6 border-b border-l border-[var(--accent)] z-10" />
+                            <span className="absolute bottom-2 right-2 w-6 h-6 border-b border-r border-[var(--accent)] z-10" />
                             <img
                                 src="/portrait_developer.jpg"
                                 alt="Muhammad Ibrahim Portrait"
@@ -389,16 +412,21 @@ export default function HomeV2() {
                 </div>
             </section>
             <section id="experience" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+                <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                  ))}
+                </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             01 //
                         </span>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold uppercase tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
                                 Experience
                             </h2>
                         </div>
@@ -417,7 +445,7 @@ export default function HomeV2() {
 
                         <div className="col-span-12 md:col-span-8 lg:col-span-6 space-y-6 mt-8 md:mt-0">
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] uppercase tracking-wider mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
                                     Fullstack Feature Delivery
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -425,7 +453,7 @@ export default function HomeV2() {
                                 </p>
                             </div>
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] uppercase tracking-wider mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
                                     REST API Integration
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -433,7 +461,7 @@ export default function HomeV2() {
                                 </p>
                             </div>
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] uppercase tracking-wider mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
                                     Collaborative Launching
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -441,7 +469,7 @@ export default function HomeV2() {
                                 </p>
                             </div>
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] uppercase tracking-wider mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
                                     Codebase Stewardship
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -453,16 +481,21 @@ export default function HomeV2() {
                 </div>
             </section>
             <section id="work" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+                <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                  ))}
+                </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             02 //
                         </span>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 mt-8 lg:mt-0">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold uppercase tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
                                 Selected Work
                             </h2>
                         </div>
@@ -474,7 +507,7 @@ export default function HomeV2() {
                                     <div key={project.id} className="py-16 first:pt-0 last:pb-0 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                                         <div className="col-span-12 md:col-span-3 lg:col-span-2 flex flex-col justify-between mb-6 md:mb-0">
                                             <div>
-                                                <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F] block">
+                                                <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
                                                     {serial}
                                                 </span>
                                                 <span className="text-[36px] md:text-[48px] font-serif text-[#141414] mt-2 block font-light leading-none">
@@ -494,12 +527,16 @@ export default function HomeV2() {
                                                 <h3 className="text-[36px] md:text-[64px] font-serif text-[#141414] tracking-tighter leading-[0.95] font-light">
                                                     {project.title}
                                                 </h3>
-                                                <p className="text-[12px] font-sans font-bold text-[#E8422F] tracking-[0.08em] uppercase mt-2">
+                                                <p className="text-[12px] font-sans font-bold text-[var(--accent)] tracking-[0.04em] mt-2">
                                                     {project.category}
                                                 </p>
                                             </div>
 
-                                            <div className="border border-[#141414]/15 overflow-hidden bg-neutral-200 w-full flex flex-col">
+                                            <div className="border border-[#141414]/15 overflow-hidden bg-neutral-200 w-full flex flex-col relative">
+                                                <span className="absolute top-0 left-0 w-1 h-1 bg-[#141414] translate-x-[-2px] translate-y-[-2px] z-10" />
+                                                <span className="absolute top-0 right-0 w-1 h-1 bg-[#141414] translate-x-[2px] translate-y-[-2px] z-10" />
+                                                <span className="absolute bottom-0 left-0 w-1 h-1 bg-[#141414] translate-x-[-2px] translate-y-[2px] z-10" />
+                                                <span className="absolute bottom-0 right-0 w-1 h-1 bg-[#141414] translate-x-[2px] translate-y-[2px] z-10" />
                                                 <div className="bg-white border-b border-[#141414]/15 px-4 py-2.5 flex items-center gap-1.5 no-print select-none">
                                                     <span className="w-2 h-2 rounded-full bg-[#FF5F56]" />
                                                     <span className="w-2 h-2 rounded-full bg-[#FFBD2E]" />
@@ -520,7 +557,7 @@ export default function HomeV2() {
                                                                     e.stopPropagation();
                                                                     prevImage(project.id, project.images.length);
                                                                 }}
-                                                                className="hover:text-[#E8422F] transition-colors cursor-pointer"
+                                                                className="hover:text-[var(--accent)] transition-colors cursor-pointer"
                                                             >
                                                                 ←
                                                             </button>
@@ -532,7 +569,7 @@ export default function HomeV2() {
                                                                     e.stopPropagation();
                                                                     nextImage(project.id, project.images.length);
                                                                 }}
-                                                                className="hover:text-[#E8422F] transition-colors cursor-pointer"
+                                                                className="hover:text-[var(--accent)] transition-colors cursor-pointer"
                                                             >
                                                                 →
                                                             </button>
@@ -543,7 +580,7 @@ export default function HomeV2() {
 
                                             <div className="grid grid-cols-1 md:grid-cols-[30%_40%_30%] gap-6 pt-6 border-t border-[#141414]/15">
                                                 <div className="space-y-2">
-                                                    <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F] block">
+                                                    <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
                                                         01 // METRICS & SCOPE
                                                     </span>
                                                     <p className="text-[16px] font-serif leading-snug text-[#141414]">
@@ -555,13 +592,13 @@ export default function HomeV2() {
                                                 </div>
 
                                                 <div className="space-y-3">
-                                                    <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F] block">
+                                                    <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
                                                         02 // KEY FEATURE UNITS
                                                     </span>
                                                     <ul className="space-y-3 text-[12px] font-mono text-[#5C5C59]">
                                                         {project.features.map((feat, i) => (
                                                             <li key={i} className="flex items-start gap-2">
-                                                                <span className="text-[#E8422F] font-bold shrink-0">↳</span>
+                                                                <span className="text-[var(--accent)] font-bold shrink-0">↳</span>
                                                                 <div>
                                                                     <strong className="text-[#141414] block font-sans text-xs">
                                                                         {feat.title}
@@ -575,7 +612,7 @@ export default function HomeV2() {
 
                                                 <div className="space-y-4">
                                                     <div className="space-y-1">
-                                                        <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F] block">
+                                                        <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
                                                             03 // SYSTEM STACK
                                                         </span>
                                                         <p className="text-[12px] font-mono text-[#5C5C59] leading-relaxed">
@@ -590,14 +627,14 @@ export default function HomeV2() {
                                                                 href={link.url}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414] hover:text-[#E8422F] underline decoration-dotted transition-colors"
+                                                                className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414] hover:text-[var(--accent)] underline decoration-dotted transition-colors"
                                                             >
                                                                 {link.label} ↗
                                                             </a>
                                                         ))}
                                                         <button
                                                             onClick={() => setSelectedProject(project)}
-                                                            className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414] hover:text-[#E8422F] underline decoration-dotted cursor-pointer"
+                                                            className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414] hover:text-[var(--accent)] underline decoration-dotted cursor-pointer"
                                                         >
                                                             OPEN SPEC ⇲
                                                         </button>
@@ -613,9 +650,14 @@ export default function HomeV2() {
                 </div>
             </section>
             <section id="capabilities" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+                <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                  ))}
+                </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             03 //
                         </span>
                     </div>
@@ -623,7 +665,7 @@ export default function HomeV2() {
                     {/* Capabilities Details (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold uppercase tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
                                 Capabilities
                             </h2>
                         </div>
@@ -708,23 +750,32 @@ export default function HomeV2() {
                 </div>
             </section>
             <section id="process" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+                <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                  ))}
+                </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             04 //
                         </span>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold uppercase tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
                                 Process
                             </h2>
                         </div>
 
                         <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-0">
                             <div className="col-span-12 md:col-span-4 lg:col-span-3 flex flex-col gap-2">
-                                <div className="border border-[#141414] overflow-hidden aspect-[4/3]">
+                                <div className="border border-[#141414] overflow-hidden aspect-[4/3] relative">
+                                    <span className="absolute top-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] -translate-y-[2px] z-10" />
+                                    <span className="absolute top-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] -translate-y-[2px] z-10" />
+                                    <span className="absolute bottom-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] translate-y-[2px] z-10" />
+                                    <span className="absolute bottom-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] translate-y-[2px] z-10" />
                                     <img
                                         src="/setup_workspace.jpg"
                                         alt="Workspace Workstation Setup"
@@ -737,7 +788,11 @@ export default function HomeV2() {
                             </div>
 
                             <div className="col-span-12 md:col-span-4 lg:col-span-4 flex flex-col gap-2">
-                                <div className="border border-[#141414] overflow-hidden aspect-[4/3]">
+                                <div className="border border-[#141414] overflow-hidden aspect-[4/3] relative">
+                                    <span className="absolute top-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] -translate-y-[2px] z-10" />
+                                    <span className="absolute top-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] -translate-y-[2px] z-10" />
+                                    <span className="absolute bottom-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] translate-y-[2px] z-10" />
+                                    <span className="absolute bottom-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] translate-y-[2px] z-10" />
                                     <img
                                         src="/whiteboard_process.jpg"
                                         alt="Architectural System Schematics"
@@ -750,7 +805,11 @@ export default function HomeV2() {
                             </div>
 
                             <div className="col-span-12 md:col-span-4 lg:col-span-3 flex flex-col gap-2">
-                                <div className="border border-[#141414] overflow-hidden aspect-[4/3]">
+                                <div className="border border-[#141414] overflow-hidden aspect-[4/3] relative">
+                                    <span className="absolute top-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] -translate-y-[2px] z-10" />
+                                    <span className="absolute top-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] -translate-y-[2px] z-10" />
+                                    <span className="absolute bottom-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] translate-y-[2px] z-10" />
+                                    <span className="absolute bottom-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] translate-y-[2px] z-10" />
                                     <img
                                         src="/screen_code.jpg"
                                         alt="Next.js Source Code Screen"
@@ -766,9 +825,14 @@ export default function HomeV2() {
                 </div>
             </section>
             <section id="education" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+                <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                  ))}
+                </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             05 //
                         </span>
                     </div>
@@ -776,7 +840,7 @@ export default function HomeV2() {
                     {/* Credentials details (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold uppercase tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
                                 Credentials
                             </h2>
                         </div>
@@ -816,9 +880,14 @@ export default function HomeV2() {
                 </div>
             </section>
             <section id="contact" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative no-print">
+                <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                  ))}
+                </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                             06 //
                         </span>
                     </div>
@@ -826,7 +895,7 @@ export default function HomeV2() {
                     {/* Contact Layout (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold uppercase tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
                                 Contact
                             </h2>
                         </div>
@@ -841,7 +910,7 @@ export default function HomeV2() {
                                         href="https://github.com"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-[#141414] hover:text-[#E8422F] underline decoration-dotted transition-colors font-bold"
+                                        className="text-[#141414] hover:text-[var(--accent)] underline decoration-dotted transition-colors font-bold"
                                     >
                                         GitHub ↗
                                     </a>
@@ -849,7 +918,7 @@ export default function HomeV2() {
                                         href="https://linkedin.com"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-[#141414] hover:text-[#E8422F] underline decoration-dotted transition-colors font-bold"
+                                        className="text-[#141414] hover:text-[var(--accent)] underline decoration-dotted transition-colors font-bold"
                                     >
                                         LinkedIn ↗
                                     </a>
@@ -888,7 +957,11 @@ export default function HomeV2() {
                                 </div>
 
                                 <div className="col-span-12 md:col-span-5 lg:col-span-6 flex flex-col gap-2">
-                                    <div className="border border-[#141414] overflow-hidden aspect-square">
+                                    <div className="border border-[#141414] overflow-hidden aspect-square relative">
+                                        <span className="absolute top-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] -translate-y-[2px] z-10" />
+                                        <span className="absolute top-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] -translate-y-[2px] z-10" />
+                                        <span className="absolute bottom-0 left-0 w-1 h-1 bg-[var(--accent)] -translate-x-[2px] translate-y-[2px] z-10" />
+                                        <span className="absolute bottom-0 right-0 w-1 h-1 bg-[var(--accent)] translate-x-[2px] translate-y-[2px] z-10" />
                                         <img
                                             src="/contact_context.jpg"
                                             alt="Drafting Tools Ink & Paper"
@@ -926,12 +999,12 @@ export default function HomeV2() {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex items-center justify-between px-6 py-4 border-b border-[#141414] font-mono text-[11px] uppercase tracking-[0.08em]">
-                            <span className="text-[#E8422F] font-bold">
+                            <span className="text-[var(--accent)] font-bold">
                                 SPEC // {selectedProject.category}
                             </span>
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="hover:text-[#E8422F] transition-colors cursor-pointer font-bold"
+                                className="hover:text-[var(--accent)] transition-colors cursor-pointer font-bold"
                             >
                                 CLOSE ✕
                             </button>
@@ -947,14 +1020,14 @@ export default function HomeV2() {
                                 </p>
                             </div>
 
-                            <div className="border-l border-[#E8422F] pl-4 py-1">
+                            <div className="border-l border-[var(--accent)] pl-4 py-1">
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
                                     {selectedProject.summary}
                                 </p>
                             </div>
 
                             <div className="space-y-4 pt-4 border-t border-[#141414]/15">
-                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                                     PROJECT INTERFACE SCREENSHOTS
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -971,14 +1044,14 @@ export default function HomeV2() {
                             </div>
 
                             <div className="space-y-4 pt-4 border-t border-[#141414]/15">
-                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                                     ENGINEERING HIGHLIGHTS
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {selectedProject.features.map((feat, i) => (
                                         <div key={i} className="border border-[#141414]/15 p-4 space-y-2">
                                             <div className="flex items-center gap-2">
-                                                <span className="font-mono text-[11px] text-[#E8422F] font-bold">
+                                                <span className="font-mono text-[11px] text-[var(--accent)] font-bold">
                                                     {String(i + 1).padStart(2, "0")} //
                                                 </span>
                                                 <strong className="text-[14px] font-sans font-bold uppercase tracking-wider text-[#141414]">
@@ -994,7 +1067,7 @@ export default function HomeV2() {
                             </div>
 
                             <div className="space-y-2 pt-4 border-t border-[#141414]/15">
-                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#E8422F]">
+                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
                                     SYSTEM STACK
                                 </h4>
                                 <p className="text-[12px] font-mono text-[#5C5C59] leading-relaxed">
@@ -1010,14 +1083,14 @@ export default function HomeV2() {
                                     href={link.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-[#141414] hover:text-[#E8422F] font-bold underline transition-colors"
+                                    className="text-[#141414] hover:text-[var(--accent)] font-bold underline transition-colors"
                                 >
                                     {link.label} ↗
                                 </a>
                             ))}
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="hover:text-[#E8422F] transition-colors cursor-pointer font-bold"
+                                className="hover:text-[var(--accent)] transition-colors cursor-pointer font-bold"
                             >
                                 DISMISS
                             </button>

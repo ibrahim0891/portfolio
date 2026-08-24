@@ -263,7 +263,7 @@ export default function Home() {
                     {/* Column 1: Eyebrow Metadata */}
                     <div className="pl-6 md:pl-12 pr-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
-                            <p className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E]">
+                            <p className="text-[9px] font-mono capitalize tracking-[0.15em] text-[#92928E]">
                                 REF // SUBJECT_01
                             </p>
                             <p className="text-[9px] font-mono tracking-[0.15em] text-[#92928E] mt-1">
@@ -278,7 +278,7 @@ export default function Home() {
                             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-serif font-light tracking-tight leading-[1.0] text-[#282826] max-w-4xl">
                                 Muhammad Ibrahim
                             </h1>
-                            <p className="text-[9px] font-mono text-[#92928E] mt-4 uppercase tracking-[0.15em]">
+                            <p className="text-[9px] font-mono text-[#92928E] mt-4 capitalize tracking-[0.15em]">
                                 Fullstack Web Developer · SM Technology
                             </p>
                         </FadeIn>
@@ -336,7 +336,7 @@ export default function Home() {
                     <div className="pl-6 md:pl-12 pr-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
                             <div className="space-y-1">
-                                <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
+                                <span className="text-[9px] font-mono capitalize tracking-[0.15em] text-[#92928E] block">
                                     01 //
                                 </span>
                                 <h2 className="text-xl md:text-2xl font-serif font-light tracking-tight text-[#282826]">
@@ -406,7 +406,7 @@ export default function Home() {
                         <div className="pl-6 md:pl-12 pr-6 pt-8 pb-8 sm:pt-10 sm:pb-10">
                             <FadeIn>
                                 <div className="space-y-1">
-                                    <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
+                                    <span className="text-[9px] font-mono capitalize tracking-[0.15em] text-[#92928E] block">
                                         02 //
                                     </span>
                                     <h2 className="text-xl md:text-2xl font-serif font-light tracking-tight text-[#282826]">
@@ -425,7 +425,7 @@ export default function Home() {
                                 {/* Left side of the 18% line: Serial Number */}
                                 <div className="pl-6 md:pl-12 pr-6 pt-16 pb-16 sm:pt-20 sm:pb-20">
                                     <FadeIn>
-                                        <span className="text-xs font-mono text-[#92928E] pt-1.5 select-none block uppercase tracking-wider">
+                                        <span className="text-xs font-mono text-[#92928E] pt-1.5 select-none block capitalize tracking-wider">
                                             {String(index + 1).padStart(2, "0")} //
                                         </span>
                                     </FadeIn>
@@ -460,7 +460,7 @@ export default function Home() {
                     <div className="pl-6 md:pl-12 pr-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
                             <div className="space-y-1">
-                                <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
+                                <span className="text-[9px] font-mono capitalize tracking-[0.15em] text-[#92928E] block">
                                     03 //
                                 </span>
                                 <h2 className="text-xl md:text-2xl font-serif font-light tracking-tight text-[#282826]">
@@ -473,7 +473,7 @@ export default function Home() {
                     {/* Column 2: Frontend */}
                     <div className="px-6 md:px-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
-                            <h3 className="text-xs font-mono font-semibold text-[#282826] uppercase tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
+                            <h3 className="text-xs font-mono font-semibold text-[#282826] capitalize tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
                                 <CpuIcon size={14} />
                                 Frontend
                             </h3>
@@ -491,7 +491,7 @@ export default function Home() {
                     {/* Column 3: Backend & APIs */}
                     <div className="px-6 md:px-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
-                            <h3 className="text-xs font-mono font-semibold text-[#282826] uppercase tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
+                            <h3 className="text-xs font-mono font-semibold text-[#282826] capitalize tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
                                 <ServerIcon size={14} />
                                 Backend & APIs
                             </h3>
@@ -509,7 +509,7 @@ export default function Home() {
                     <div className="pl-6 md:pl-6 pr-6 md:pr-12 space-y-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
                             <div>
-                                <h3 className="text-xs font-mono font-semibold text-[#282826] uppercase tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
+                                <h3 className="text-xs font-mono font-semibold text-[#282826] capitalize tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
                                     <DatabaseIcon size={14} />
                                     Data Modeling
                                 </h3>
@@ -524,7 +524,7 @@ export default function Home() {
 
                         <FadeIn>
                             <div>
-                                <h3 className="text-xs font-mono font-semibold text-[#282826] uppercase tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
+                                <h3 className="text-xs font-mono font-semibold text-[#282826] capitalize tracking-[0.06em] mb-2.5 pb-1.5 border-b border-[#D8D6D0] flex items-center gap-1.5">
                                     <GitBranchIcon size={14} />
                                     Workflow
                                 </h3>
@@ -567,7 +567,7 @@ export default function Home() {
                     <div className="pl-6 md:pl-12 pr-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
                             <div className="space-y-1">
-                                <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
+                                <span className="text-[9px] font-mono capitalize tracking-[0.15em] text-[#92928E] block">
                                     04 //
                                 </span>
                                 <h2 className="text-xl md:text-2xl font-serif font-light tracking-tight text-[#282826]">
@@ -653,7 +653,7 @@ export default function Home() {
                     <div className="pl-6 md:pl-12 pr-6 pt-8 pb-16 sm:pt-10 sm:pb-24">
                         <FadeIn>
                             <div className="space-y-1">
-                                <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
+                                <span className="text-[9px] font-mono capitalize tracking-[0.15em] text-[#92928E] block">
                                     05 //
                                 </span>
                                 <h2 className="text-xl md:text-2xl font-serif font-light tracking-tight text-[#282826]">

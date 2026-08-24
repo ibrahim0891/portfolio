@@ -13,6 +13,7 @@
     --text-primary: #282826;        /* Primary charcoal */
     --text-secondary: #5C5C59;      /* Secondary slate/dust gray */
     --text-muted: #92928E;          /* Muted chalky gray */
+    --accent: #E8422F;              /* Signal accent — overridden per color scheme */
   }
 }
 
