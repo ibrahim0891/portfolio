@@ -221,9 +221,9 @@ export default function ProjectShowcase({ project, onOpenSpec }: ProjectShowcase
       )}
 
       {/* Typographical Details Rows */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+      <div className="grid grid-cols-1 md:grid-cols-[33%_40%_27%] gap-y-8 md:gap-y-0 md:divide-x md:divide-[#D8D6D0] pt-4">
         {/* Column 1: Scope & Metrics */}
-        <div className="space-y-2 min-w-0">
+        <div className="space-y-2 min-w-0 md:pr-6">
           <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
             01 // METRICS & SCOPE
           </span>
@@ -236,7 +236,7 @@ export default function ProjectShowcase({ project, onOpenSpec }: ProjectShowcase
         </div>
 
         {/* Column 2: Key Implementations */}
-        <div className="space-y-2 min-w-0">
+        <div className="space-y-2 min-w-0 md:px-6">
           <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
             02 // IMPLEMENTATIONS
           </span>
@@ -256,7 +256,7 @@ export default function ProjectShowcase({ project, onOpenSpec }: ProjectShowcase
         </div>
 
         {/* Column 3: Tech Stack */}
-        <div className="space-y-2 min-w-0 pl-24">
+        <div className="space-y-2 min-w-0 md:pl-6">
           <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#92928E] block">
             03 // SYSTEM STACK
           </span>
