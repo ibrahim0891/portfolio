@@ -4,16 +4,16 @@ import React, { useState, useEffect } from "react";
 import { TOKENS } from "./tokens";
 
 const COLOR_SCHEMES = [
-  { name: "Swiss Red",      accent: "#E8422F" },
-  { name: "Safety Orange",  accent: "#E05C1A" },
-  { name: "Deep Cobalt",    accent: "#1D4ED8" },
-  { name: "Forest",         accent: "#15803D" },
-  { name: "Teal",           accent: "#0F766E" },
-  { name: "Warm Purple",    accent: "#7C3AED" },
-  { name: "Terracotta",     accent: "#C2410C" },
-  { name: "Steel Blue",     accent: "#0369A1" },
-  { name: "Crimson",        accent: "#BE123C" },
-  { name: "Olive",          accent: "#4D7C0F" },
+    { name: "Swiss Red", accent: "#E8422F" },
+    { name: "Safety Orange", accent: "#E05C1A" },
+    { name: "Deep Cobalt", accent: "#1D4ED8" },
+    { name: "Forest", accent: "#15803D" },
+    { name: "Teal", accent: "#0F766E" },
+    { name: "Warm Purple", accent: "#7C3AED" },
+    { name: "Terracotta", accent: "#C2410C" },
+    { name: "Steel Blue", accent: "#0369A1" },
+    { name: "Crimson", accent: "#BE123C" },
+    { name: "Olive", accent: "#4D7C0F" },
 ];
 
 export interface ProjectData {
@@ -241,10 +241,6 @@ export default function HomeV2() {
 
     return (
         <div className="w-full min-h-screen bg-[#F3F2ED] text-[#141414] selection:bg-[var(--accent)] selection:text-white font-sans relative overflow-x-hidden pb-24">
-            <style>{`:root { --accent: ${scheme.accent}; }`}</style>
-            <div className="fixed bottom-16 right-6 z-50 text-[10px] font-mono uppercase tracking-[0.1em] text-[#92928E] no-print select-none">
-              {scheme.name}
-            </div>
             {showGridOverlay && (
                 <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-50 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
@@ -255,14 +251,14 @@ export default function HomeV2() {
 
             <button
                 onClick={() => setShowGridOverlay(!showGridOverlay)}
-                className="fixed bottom-6 right-6 z-50 bg-[#141414] text-[#F3F2ED] hover:bg-[var(--accent)] hover:text-white px-4 py-2 font-mono text-[11px] uppercase tracking-[0.1em] border border-[#141414] transition-colors cursor-pointer no-print font-bold"
+                className="fixed bottom-6 right-6 z-50 bg-[#141414] text-[#F3F2ED] hover:bg-[var(--accent)] hover:text-white px-4 py-2 font-mono text-[11px] capitalize tracking-[0.1em] border border-[#141414] transition-colors cursor-pointer no-print font-bold"
             >
                 GRID: {showGridOverlay ? "ON" : "OFF"}
             </button>
             <header className="sticky top-0 z-40 bg-[#F3F2ED]/95 backdrop-blur-[1px] w-full border-b border-[#141414]/15 no-print">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-4 flex justify-between lg:grid lg:grid-cols-12 gap-y-3 lg:gap-y-0 md:gap-x-6 items-center">
                     <div className="lg:col-span-3">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.2em] text-[#141414]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.2em] text-[#141414]">
                             MUHAMMAD IBRAHIM
                         </span>
                     </div>
@@ -270,24 +266,24 @@ export default function HomeV2() {
                     <div className="lg:hidden">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-[12px] font-sans font-bold uppercase tracking-[0.1em] text-[#141414] hover:text-[var(--accent)] cursor-pointer"
+                            className="text-[12px] font-sans font-bold capitalize tracking-[0.1em] text-[#141414] hover:text-[var(--accent)] cursor-pointer"
                         >
                             {isMenuOpen ? "CLOSE ✕" : "MENU ☰"}
                         </button>
                     </div>
 
                     <nav className="hidden lg:flex lg:col-span-5 items-center justify-start gap-8">
-                        <a href="#work" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
-                            WORK
+                        <a href="#work" className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
+                            Work
                         </a>
-                        <a href="#capabilities" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
-                            CAPABILITIES
+                        <a href="#capabilities" className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
+                            Capabilities
                         </a>
-                        <a href="#experience" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
-                            EXPERIENCE
+                        <a href="#experience" className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
+                            Experience
                         </a>
-                        <a href="#contact" className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
-                            CONTACT
+                        <a href="#contact" className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[#141414]/70 hover:text-[var(--accent)] transition-colors">
+                            Contact
                         </a>
                     </nav>
 
@@ -306,7 +302,7 @@ export default function HomeV2() {
                             <a
                                 href="#work"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold capitalize tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
                                 <span className="text-[12px] font-mono text-[var(--accent)]">01 //</span>
                                 WORK
@@ -314,7 +310,7 @@ export default function HomeV2() {
                             <a
                                 href="#capabilities"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold capitalize tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
                                 <span className="text-[12px] font-mono text-[var(--accent)]">02 //</span>
                                 CAPABILITIES
@@ -322,7 +318,7 @@ export default function HomeV2() {
                             <a
                                 href="#experience"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold capitalize tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
                                 <span className="text-[12px] font-mono text-[var(--accent)]">03 //</span>
                                 EXPERIENCE
@@ -330,7 +326,7 @@ export default function HomeV2() {
                             <a
                                 href="#contact"
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-[28px] font-sans font-extrabold tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
+                                className="text-[28px] font-sans font-extrabold capitalize tracking-tight text-[#141414] hover:text-[var(--accent)] flex items-center gap-4 transition-colors"
                             >
                                 <span className="text-[12px] font-mono text-[var(--accent)]">04 //</span>
                                 CONTACT
@@ -356,7 +352,7 @@ export default function HomeV2() {
 
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-12 md:py-16 lg:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
                     <div className="col-span-12 md:col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             00 // HERO
                         </span>
                         <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-4">
@@ -373,8 +369,8 @@ export default function HomeV2() {
                         <h1 className="text-[56px] sm:text-[72px] md:text-[88px] lg:text-[96px] font-serif leading-[0.9] tracking-[-0.03em] text-[#141414] font-light">
                             Muhammad Ibrahim
                         </h1>
-                        <span className="text-[12px] font-sans font-bold tracking-[0.06em] text-[var(--accent)] mt-6 block">
-                            Fullstack Web Developer · SM Technology
+                        <span className="text-[12px] font-sans capitalize font-bold tracking-[0.15em] text-[var(--accent)] mt-6 block">
+                            FULLSTACK WEB DEVELOPER · SM TECHNOLOGY
                         </span>
                         <p className="text-[18px] md:text-[22px] leading-[30px] font-sans text-[#5C5C59] mt-8 max-w-2xl font-light">
                             Building practical, maintainable web applications — from client analysis through production deployment — with Next.js, TypeScript, PostgreSQL, and Express.
@@ -382,13 +378,13 @@ export default function HomeV2() {
 
                         <div className="mt-16 pt-8 border-t border-[#141414]/15 flex flex-wrap gap-x-8 gap-y-4 text-[12px] font-mono text-[#5C5C59]">
                             <div className="flex items-center gap-2">
-                                <span className="text-[var(--accent)] font-bold">~1 yr</span> experience
+                                <span className="text-[var(--accent)] font-bold">~1 YR</span> EXPERIENCE
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-[var(--accent)] font-bold">02</span> production apps
+                                <span className="text-[var(--accent)] font-bold">02</span> PRODUCTION APPS
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-[var(--accent)] font-bold">300+</span> MAU scaled
+                                <span className="text-[var(--accent)] font-bold">300+</span> MAU SCALED
                             </div>
                         </div>
                     </div>
@@ -405,7 +401,7 @@ export default function HomeV2() {
                                 className="w-full h-full object-cover   contrast-100"
                             />
                         </div>
-                        <span className="text-[11px] font-sans uppercase tracking-[0.08em] text-[#92928E] self-end">
+                        <span className="text-[11px] font-sans capitalize tracking-[0.08em] text-[#92928E] self-end">
                             PORTRAIT / DHAKA / 2026
                         </span>
                     </div>
@@ -413,20 +409,20 @@ export default function HomeV2() {
             </section>
             <section id="experience" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
-                  ))}
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                    ))}
                 </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             01 //
                         </span>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Experience
                             </h2>
                         </div>
@@ -438,14 +434,14 @@ export default function HomeV2() {
                             <h3 className="text-[28px] font-serif leading-tight text-[#141414] font-light">
                                 Frontend Developer
                             </h3>
-                            <span className="text-[12px] font-sans font-bold uppercase tracking-[0.1em] text-[#5C5C59] mt-2 block">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.1em] text-[#5C5C59] mt-2 block">
                                 SM TECHNOLOGY
                             </span>
                         </div>
 
                         <div className="col-span-12 md:col-span-8 lg:col-span-6 space-y-6 mt-8 md:mt-0">
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] capitalize tracking-wider mb-2">
                                     Fullstack Feature Delivery
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -453,7 +449,7 @@ export default function HomeV2() {
                                 </p>
                             </div>
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] capitalize tracking-wider mb-2">
                                     REST API Integration
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -461,7 +457,7 @@ export default function HomeV2() {
                                 </p>
                             </div>
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] capitalize tracking-wider mb-2">
                                     Collaborative Launching
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -469,7 +465,7 @@ export default function HomeV2() {
                                 </p>
                             </div>
                             <div className="border-b border-[#141414]/10 pb-6 last:border-b-0 last:pb-0">
-                                <h4 className="text-[14px] font-sans font-bold text-[#141414] tracking-wide mb-2">
+                                <h4 className="text-[14px] font-sans font-bold text-[#141414] capitalize tracking-wider mb-2">
                                     Codebase Stewardship
                                 </h4>
                                 <p className="text-[16px] leading-[24px] font-sans text-[#5C5C59]">
@@ -482,20 +478,20 @@ export default function HomeV2() {
             </section>
             <section id="work" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
-                  ))}
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                    ))}
                 </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             02 //
                         </span>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 mt-8 lg:mt-0">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Selected Work
                             </h2>
                         </div>
@@ -507,7 +503,7 @@ export default function HomeV2() {
                                     <div key={project.id} className="py-16 first:pt-0 last:pb-0 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                                         <div className="col-span-12 md:col-span-3 lg:col-span-2 flex flex-col justify-between mb-6 md:mb-0">
                                             <div>
-                                                <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
+                                                <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] block">
                                                     {serial}
                                                 </span>
                                                 <span className="text-[36px] md:text-[48px] font-serif text-[#141414] mt-2 block font-light leading-none">
@@ -527,7 +523,7 @@ export default function HomeV2() {
                                                 <h3 className="text-[36px] md:text-[64px] font-serif text-[#141414] tracking-tighter leading-[0.95] font-light">
                                                     {project.title}
                                                 </h3>
-                                                <p className="text-[12px] font-sans font-bold text-[var(--accent)] tracking-[0.04em] mt-2">
+                                                <p className="text-[12px] font-sans font-bold text-[var(--accent)] tracking-[0.08em] capitalize mt-2">
                                                     {project.category}
                                                 </p>
                                             </div>
@@ -580,7 +576,7 @@ export default function HomeV2() {
 
                                             <div className="grid grid-cols-1 md:grid-cols-[30%_40%_30%] gap-6 pt-6 border-t border-[#141414]/15">
                                                 <div className="space-y-2">
-                                                    <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
+                                                    <span className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] block">
                                                         01 // METRICS & SCOPE
                                                     </span>
                                                     <p className="text-[16px] font-serif leading-snug text-[#141414]">
@@ -592,7 +588,7 @@ export default function HomeV2() {
                                                 </div>
 
                                                 <div className="space-y-3">
-                                                    <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
+                                                    <span className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] block">
                                                         02 // KEY FEATURE UNITS
                                                     </span>
                                                     <ul className="space-y-3 text-[12px] font-mono text-[#5C5C59]">
@@ -612,7 +608,7 @@ export default function HomeV2() {
 
                                                 <div className="space-y-4">
                                                     <div className="space-y-1">
-                                                        <span className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)] block">
+                                                        <span className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] block">
                                                             03 // SYSTEM STACK
                                                         </span>
                                                         <p className="text-[12px] font-mono text-[#5C5C59] leading-relaxed">
@@ -627,14 +623,14 @@ export default function HomeV2() {
                                                                 href={link.url}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414] hover:text-[var(--accent)] underline decoration-dotted transition-colors"
+                                                                className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[#141414] hover:text-[var(--accent)] underline decoration-dotted transition-colors"
                                                             >
                                                                 {link.label} ↗
                                                             </a>
                                                         ))}
                                                         <button
                                                             onClick={() => setSelectedProject(project)}
-                                                            className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[#141414] hover:text-[var(--accent)] underline decoration-dotted cursor-pointer"
+                                                            className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[#141414] hover:text-[var(--accent)] underline decoration-dotted cursor-pointer"
                                                         >
                                                             OPEN SPEC ⇲
                                                         </button>
@@ -651,13 +647,13 @@ export default function HomeV2() {
             </section>
             <section id="capabilities" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
-                  ))}
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                    ))}
                 </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             03 //
                         </span>
                     </div>
@@ -665,14 +661,14 @@ export default function HomeV2() {
                     {/* Capabilities Details (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Capabilities
                             </h2>
                         </div>
 
                         <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-0 mt-8 md:mt-0">
                             <div className="col-span-12 md:col-span-4 lg:col-span-3">
-                                <h3 className="text-[12px] font-sans font-bold text-[#141414] uppercase tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
+                                <h3 className="text-[12px] font-sans font-bold text-[#141414] capitalize tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
                                     <svg className="w-4 h-4 text-[#141414] shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                                         <rect x="4" y="4" width="16" height="16" rx="0" />
                                         <path d="M9 9h6v6H9z" />
@@ -691,7 +687,7 @@ export default function HomeV2() {
                             </div>
 
                             <div className="col-span-12 md:col-span-4 lg:col-span-4">
-                                <h3 className="text-[12px] font-sans font-bold text-[#141414] uppercase tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
+                                <h3 className="text-[12px] font-sans font-bold text-[#141414] capitalize tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
                                     <svg className="w-4 h-4 text-[#141414] shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                                         <rect x="2" y="2" width="20" height="6" />
                                         <rect x="2" y="9" width="20" height="6" />
@@ -711,7 +707,7 @@ export default function HomeV2() {
 
                             <div className="col-span-12 md:col-span-4 lg:col-span-3 space-y-8">
                                 <div>
-                                    <h3 className="text-[12px] font-sans font-bold text-[#141414] uppercase tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
+                                    <h3 className="text-[12px] font-sans font-bold text-[#141414] capitalize tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
                                         <svg className="w-4 h-4 text-[#141414] shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                                             <ellipse cx="12" cy="5" rx="9" ry="3" />
                                             <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
@@ -728,7 +724,7 @@ export default function HomeV2() {
                                 </div>
 
                                 <div>
-                                    <h3 className="text-[12px] font-sans font-bold text-[#141414] uppercase tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
+                                    <h3 className="text-[12px] font-sans font-bold text-[#141414] capitalize tracking-[0.08em] mb-4 pb-2 border-b border-[#141414]/15 flex items-center gap-2">
                                         <svg className="w-4 h-4 text-[#141414] shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                                             <circle cx="18" cy="18" r="3" />
                                             <circle cx="6" cy="6" r="3" />
@@ -751,20 +747,20 @@ export default function HomeV2() {
             </section>
             <section id="process" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
-                  ))}
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                    ))}
                 </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             04 //
                         </span>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Process
                             </h2>
                         </div>
@@ -782,7 +778,7 @@ export default function HomeV2() {
                                         className="w-full h-full object-cover grayscale contrast-110"
                                     />
                                 </div>
-                                <span className="text-[11px] font-sans uppercase tracking-[0.08em] text-[#92928E] self-end">
+                                <span className="text-[11px] font-sans capitalize tracking-[0.08em] text-[#92928E] self-end">
                                     PROCESS_01 // SETUP
                                 </span>
                             </div>
@@ -799,7 +795,7 @@ export default function HomeV2() {
                                         className="w-full h-full object-cover grayscale contrast-110"
                                     />
                                 </div>
-                                <span className="text-[11px] font-sans uppercase tracking-[0.08em] text-[#92928E] self-end">
+                                <span className="text-[11px] font-sans capitalize tracking-[0.08em] text-[#92928E] self-end">
                                     PROCESS_02 // SYSTEM SCHEMATICS
                                 </span>
                             </div>
@@ -816,7 +812,7 @@ export default function HomeV2() {
                                         className="w-full h-full object-cover grayscale contrast-110"
                                     />
                                 </div>
-                                <span className="text-[11px] font-sans uppercase tracking-[0.08em] text-[#92928E] self-end">
+                                <span className="text-[11px] font-sans capitalize tracking-[0.08em] text-[#92928E] self-end">
                                     PROCESS_03 // IMPLEMENTATION
                                 </span>
                             </div>
@@ -826,13 +822,13 @@ export default function HomeV2() {
             </section>
             <section id="education" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
-                  ))}
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                    ))}
                 </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             05 //
                         </span>
                     </div>
@@ -840,7 +836,7 @@ export default function HomeV2() {
                     {/* Credentials details (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Credentials
                             </h2>
                         </div>
@@ -881,13 +877,13 @@ export default function HomeV2() {
             </section>
             <section id="contact" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative no-print">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, i) => (
-                    <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
-                  ))}
+                    {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                    ))}
                 </div>
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
                     <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                             06 //
                         </span>
                     </div>
@@ -895,7 +891,7 @@ export default function HomeV2() {
                     {/* Contact Layout (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
                         <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
-                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold tracking-[-0.03em] leading-none text-[#141414]">
+                            <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Contact
                             </h2>
                         </div>
@@ -905,7 +901,7 @@ export default function HomeV2() {
                                 <p className="text-[36px] md:text-[72px] font-serif text-[#141414] leading-[0.95] tracking-tighter font-light">
                                     Let&apos;s build something precise, reliable, and high-velocity.
                                 </p>
-                                <div className="mt-8 flex items-center gap-6 text-[12px] font-mono uppercase tracking-[0.08em]">
+                                <div className="mt-8 flex items-center gap-6 text-[12px] font-mono capitalize tracking-[0.08em]">
                                     <a
                                         href="https://github.com"
                                         target="_blank"
@@ -929,7 +925,7 @@ export default function HomeV2() {
                                 <div className="col-span-12 md:col-span-7 lg:col-span-6 border border-[#141414] bg-[#F3F2ED] divide-y divide-[#141414] text-[12px] font-mono">
                                     {/* Email */}
                                     <div className="p-4 space-y-2">
-                                        <span className="text-[#92928E] block text-[10px] tracking-wider uppercase font-bold">EMAIL ADDRESS</span>
+                                        <span className="text-[#92928E] block text-[10px] tracking-wider capitalize font-bold">EMAIL ADDRESS</span>
                                         <a
                                             href="mailto:muhammadibrahim98297996@gmail.com"
                                             className="text-[13px] font-serif text-[#141414] hover:underline block break-all leading-tight"
@@ -938,7 +934,7 @@ export default function HomeV2() {
                                         </a>
                                         <button
                                             onClick={copyEmail}
-                                            className="border border-[#141414] hover:bg-[#141414] hover:text-[#F3F2ED] px-2 py-1.5 text-[11px] font-mono tracking-wider uppercase transition-colors cursor-pointer mt-2 block w-full text-center font-bold"
+                                            className="border border-[#141414] hover:bg-[#141414] hover:text-[#F3F2ED] px-2 py-1.5 text-[11px] font-mono tracking-wider capitalize transition-colors cursor-pointer mt-2 block w-full text-center font-bold"
                                         >
                                             {copiedEmail ? "COPIED ✓" : "COPY EMAIL"}
                                         </button>
@@ -946,7 +942,7 @@ export default function HomeV2() {
 
                                     {/* Phone */}
                                     <div className="p-4 space-y-1">
-                                        <span className="text-[#92928E] block text-[10px] tracking-wider uppercase font-bold">PHONE & WHATSAPP</span>
+                                        <span className="text-[#92928E] block text-[10px] tracking-wider capitalize font-bold">PHONE & WHATSAPP</span>
                                         <a
                                             href="tel:+8801834667996"
                                             className="text-[13px] font-serif text-[#141414] hover:underline block"
@@ -968,7 +964,7 @@ export default function HomeV2() {
                                             className="w-full h-full object-cover grayscale contrast-110"
                                         />
                                     </div>
-                                    <span className="text-[11px] font-sans uppercase tracking-[0.08em] text-[#92928E] self-end">
+                                    <span className="text-[11px] font-sans capitalize tracking-[0.08em] text-[#92928E] self-end">
                                         CONTEXT / INK & PAPER / 2026
                                     </span>
                                 </div>
@@ -978,7 +974,7 @@ export default function HomeV2() {
                 </div>
             </section>
             <footer className="w-full bg-[#F3F2ED] no-print">
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-12 grid grid-cols-12 gap-x-4 md:gap-x-6 border-t border-[#141414]/15 text-[11px] font-mono text-[#92928E] uppercase tracking-wider">
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-12 grid grid-cols-12 gap-x-4 md:gap-x-6 border-t border-[#141414]/15 text-[11px] font-mono text-[#92928E] capitalize tracking-wider">
                     <div className="col-span-12 md:col-span-6">
                         © 2026 MUHAMMAD IBRAHIM · DHAKA, BANGLADESH
                     </div>
@@ -998,7 +994,7 @@ export default function HomeV2() {
                         className="relative w-full max-w-3xl bg-[#F3F2ED] border border-[#141414] text-[#141414] flex flex-col max-h-[85vh]"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="flex items-center justify-between px-6 py-4 border-b border-[#141414] font-mono text-[11px] uppercase tracking-[0.08em]">
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-[#141414] font-mono text-[11px] capitalize tracking-[0.08em]">
                             <span className="text-[var(--accent)] font-bold">
                                 SPEC // {selectedProject.category}
                             </span>
@@ -1027,7 +1023,7 @@ export default function HomeV2() {
                             </div>
 
                             <div className="space-y-4 pt-4 border-t border-[#141414]/15">
-                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                                <h4 className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                                     PROJECT INTERFACE SCREENSHOTS
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1044,7 +1040,7 @@ export default function HomeV2() {
                             </div>
 
                             <div className="space-y-4 pt-4 border-t border-[#141414]/15">
-                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                                <h4 className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                                     ENGINEERING HIGHLIGHTS
                                 </h4>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1054,7 +1050,7 @@ export default function HomeV2() {
                                                 <span className="font-mono text-[11px] text-[var(--accent)] font-bold">
                                                     {String(i + 1).padStart(2, "0")} //
                                                 </span>
-                                                <strong className="text-[14px] font-sans font-bold uppercase tracking-wider text-[#141414]">
+                                                <strong className="text-[14px] font-sans font-bold capitalize tracking-wider text-[#141414]">
                                                     {feat.title}
                                                 </strong>
                                             </div>
@@ -1067,7 +1063,7 @@ export default function HomeV2() {
                             </div>
 
                             <div className="space-y-2 pt-4 border-t border-[#141414]/15">
-                                <h4 className="text-[11px] font-sans font-bold uppercase tracking-[0.08em] text-[var(--accent)]">
+                                <h4 className="text-[11px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
                                     SYSTEM STACK
                                 </h4>
                                 <p className="text-[12px] font-mono text-[#5C5C59] leading-relaxed">
@@ -1076,7 +1072,7 @@ export default function HomeV2() {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-end gap-6 px-6 py-4 border-t border-[#141414] font-mono text-[11px] uppercase tracking-[0.08em]">
+                        <div className="flex items-center justify-end gap-6 px-6 py-4 border-t border-[#141414] font-mono text-[11px] capitalize tracking-[0.08em]">
                             {selectedProject.links?.map((link, i) => (
                                 <a
                                     key={i}
