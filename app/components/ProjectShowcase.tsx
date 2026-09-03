@@ -143,7 +143,7 @@ export default function ProjectShowcase({ project, onOpenSpec }: ProjectShowcase
                                     setOverlayImgSrc(imgSrc);
                                     setIsOverlayOpen(true);
                                 }}
-                                className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 rounded-[2px] grayscale hover:grayscale-0 cursor-zoom-in ${idx === activeIdx ? "opacity-100 z-10" : "opacity-0 z-0"
+                                className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 rounded-[2px] cursor-zoom-in ${idx === activeIdx ? "opacity-100 z-10" : "opacity-0 z-0"
                                     }`}
                             />
                         ))}
@@ -182,7 +182,7 @@ export default function ProjectShowcase({ project, onOpenSpec }: ProjectShowcase
                             setOverlayImgSrc(project.imageSrc);
                             setIsOverlayOpen(true);
                         }}
-                        className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500 rounded-[2px] cursor-zoom-in"
+                        className="w-full h-auto transition-all duration-500 rounded-[2px] cursor-zoom-in"
                     />
                 )}
             </div>

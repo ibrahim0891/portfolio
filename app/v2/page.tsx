@@ -233,6 +233,30 @@ export default function HomeV2() {
         return () => clearInterval(interval);
     }, []);
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-drawn");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.05,
+                rootMargin: "0px 0px -40px 0px",
+            }
+        );
+
+        const elements = document.querySelectorAll(".draft-line, .draft-grid-col");
+        elements.forEach((el) => observer.observe(el));
+
+        return () => {
+            elements.forEach((el) => observer.unobserve(el));
+        };
+    }, []);
+
     const copyEmail = () => {
         navigator.clipboard.writeText("muhammadibrahim98297996@gmail.com");
         setCopiedEmail(true);
@@ -240,7 +264,7 @@ export default function HomeV2() {
     };
 
     return (
-        <div className="w-full min-h-screen bg-[#F3F2ED] text-[#141414] selection:bg-[var(--accent)] selection:text-white font-sans relative overflow-x-hidden pb-24">
+        <div className="w-full min-h-screen bg-[#F3F2ED] text-[#141414] selection:bg-[var(--accent)] selection:text-white font-sans relative overflow-x-clip pb-24">
             {showGridOverlay && (
                 <div className="fixed inset-y-0 left-0 right-0 pointer-events-none z-50 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
@@ -343,40 +367,50 @@ export default function HomeV2() {
                     </div>
                 )}
             </header>
-            <section id="hero" className="w-full border-b border-[#141414]/15 relative bg-[#F3F2ED]">
+            <section id="hero" className="w-full relative bg-[#F3F2ED]">
                 <div className="absolute inset-y-0 left-0 right-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
 
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-12 md:py-16 lg:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
-                    <div className="col-span-12 md:col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            00 // HERO
-                        </span>
-                        <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-4">
-                            <span className="text-[11px] font-mono text-[#92928E] block">
-                                REF // SUBJECT_01
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                00 // HERO
                             </span>
-                            <span className="text-[11px] font-mono text-[#92928E] block">
-                                23.77°N 90.42°E
-                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // SUBJECT_01
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    23.77°N 90.42°E
+                                </span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="col-span-12 md:col-span-8 lg:col-span-6 flex flex-col justify-center mt-4 md:mt-0">
+                    <div className="col-span-12 lg:col-span-10 flex flex-col justify-center mt-4 lg:mt-0">
                         <h1 className="text-[56px] sm:text-[72px] md:text-[88px] lg:text-[96px] font-serif leading-[0.9] tracking-[-0.03em] text-[#141414] font-light">
                             Muhammad Ibrahim
                         </h1>
                         <span className="text-[12px] font-sans capitalize font-bold tracking-[0.15em] text-[var(--accent)] mt-6 block">
                             FULLSTACK WEB DEVELOPER · SM TECHNOLOGY
                         </span>
-                        <p className="text-[18px] md:text-[22px] leading-[30px] font-sans text-[#5C5C59] mt-8 max-w-2xl font-light">
+                        <p className="text-[18px] md:text-[22px] leading-[30px] font-sans text-[#5C5C59] mt-8 max-w-3xl font-light">
                             Building practical, maintainable web applications — from client analysis through production deployment — with Next.js, TypeScript, PostgreSQL, and Express.
                         </p>
 
-                        <div className="mt-16 pt-8 border-t border-[#141414]/15 flex flex-wrap gap-x-8 gap-y-4 text-[12px] font-mono text-[#5C5C59]">
+                        <div className="mt-16 pt-8 relative flex flex-wrap gap-x-8 gap-y-4 text-[12px] font-mono text-[#5C5C59]">
+                            <div className="absolute top-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                             <div className="flex items-center gap-2">
                                 <span className="text-[var(--accent)] font-bold">~1 YR</span> EXPERIENCE
                             </div>
@@ -388,43 +422,48 @@ export default function HomeV2() {
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="col-span-12 md:col-span-4 lg:col-span-4 flex flex-col justify-end mt-8 md:mt-0 gap-2">
-                        <div className="border border-[#d5d5d5] overflow-hidden aspect-[3/4] relative">
-                            <span className="absolute top-2 left-2 w-6 h-6 border-t border-l border-[var(--accent)] z-10" />
-                            <span className="absolute top-2 right-2 w-6 h-6 border-t border-r border-[var(--accent)] z-10" />
-                            <span className="absolute bottom-2 left-2 w-6 h-6 border-b border-l border-[var(--accent)] z-10" />
-                            <span className="absolute bottom-2 right-2 w-6 h-6 border-b border-r border-[var(--accent)] z-10" />
-                            <img
-                                src="/portrait_developer.jpg"
-                                alt="Muhammad Ibrahim Portrait"
-                                className="w-full h-full object-cover   contrast-100"
-                            />
-                        </div>
-                        <span className="text-[11px] font-sans capitalize tracking-[0.08em] text-[#92928E] self-end">
-                            PORTRAIT / DHAKA / 2026
-                        </span>
-                    </div>
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
                 </div>
             </section>
-            <section id="experience" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+            <section id="experience" className="w-full bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
-                    <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            01 //
-                        </span>
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                01 // EXPERIENCE
+                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // ROLES_TIMELINE
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    2025 — PRESENT
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
-                        <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
+                        <div className="col-span-12 lg:col-span-10 pb-6 mb-16 lg:mb-24 relative">
                             <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Experience
                             </h2>
+                            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                         </div>
 
                         <div className="col-span-12 md:col-span-4 lg:col-span-4">
@@ -475,32 +514,59 @@ export default function HomeV2() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
+                </div>
             </section>
-            <section id="work" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+            <section id="work" className="w-full bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
-                    <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            02 //
-                        </span>
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                02 // SELECTED WORK
+                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // PRODUCTION_APPS
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    03 LIVE DEPLOYMENTS
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 mt-8 lg:mt-0">
-                        <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
+                        <div className="col-span-12 lg:col-span-10 pb-6 mb-16 lg:mb-24 relative">
                             <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Selected Work
                             </h2>
+                            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                         </div>
 
-                        <div className="divide-y divide-[#141414]/15">
+                        <div>
                             {PROJECTS.map((project, idx) => {
                                 const serial = `02.${idx + 1} //`;
                                 return (
-                                    <div key={project.id} className="py-16 first:pt-0 last:pb-0 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
+                                    <div key={project.id} className="py-16 first:pt-0 last:pb-0 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6 relative">
+                                        {idx > 0 && (
+                                            <div className="absolute top-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                                <div className="draft-line h-full bg-[#141414]/20 relative" />
+                                            </div>
+                                        )}
                                         <div className="col-span-12 md:col-span-3 lg:col-span-2 flex flex-col justify-between mb-6 md:mb-0">
                                             <div>
                                                 <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] block">
@@ -543,7 +609,7 @@ export default function HomeV2() {
                                                     <img
                                                         src={project.images[activeImageIndices[project.id] || 0]}
                                                         alt={`${project.title} Interface Screenshot`}
-                                                        className="w-full h-full object-cover object-top grayscale"
+                                                        className="w-full h-full object-cover object-top"
                                                     />
 
                                                     {project.images.length > 1 && (
@@ -644,26 +710,48 @@ export default function HomeV2() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
+                </div>
             </section>
-            <section id="capabilities" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+            <section id="capabilities" className="w-full bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
-                    <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            03 //
-                        </span>
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                03 // CAPABILITIES
+                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // TECH_STACK
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    FULLSTACK SYSTEMS
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Capabilities Details (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
-                        <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
+                        <div className="col-span-12 lg:col-span-10 pb-6 mb-16 lg:mb-24 relative">
                             <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Capabilities
                             </h2>
+                            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                         </div>
 
                         <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-0 mt-8 md:mt-0">
@@ -744,25 +832,47 @@ export default function HomeV2() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
+                </div>
             </section>
-            <section id="process" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+            <section id="process" className="w-full bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 grid grid-cols-12 gap-x-4 md:gap-x-6">
-                    <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            04 //
-                        </span>
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                04 // PROCESS
+                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // WORKFLOW
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    ENGINEERING DISCIPLINE
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
-                        <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
+                        <div className="col-span-12 lg:col-span-10 pb-6 mb-16 lg:mb-24 relative">
                             <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Process
                             </h2>
+                            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                         </div>
 
                         <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-0">
@@ -819,26 +929,48 @@ export default function HomeV2() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
+                </div>
             </section>
-            <section id="education" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative">
+            <section id="education" className="w-full bg-[#F3F2ED] relative">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
-                    <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            05 //
-                        </span>
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                05 // CREDENTIALS
+                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // ACADEMICS
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    B.SC & DIPLOMA
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Credentials details (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
-                        <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
+                        <div className="col-span-12 lg:col-span-10 pb-6 mb-16 lg:mb-24 relative">
                             <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Credentials
                             </h2>
+                            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                         </div>
 
                         <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6 gap-y-8 md:gap-y-0 mt-8 md:mt-0">
@@ -874,26 +1006,48 @@ export default function HomeV2() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
+                </div>
             </section>
-            <section id="contact" className="w-full border-b border-[#141414]/15 bg-[#F3F2ED] relative no-print">
+            <section id="contact" className="w-full bg-[#F3F2ED] relative no-print">
                 <div className="absolute inset-0 pointer-events-none z-0 max-w-[1440px] mx-auto px-6 md:px-16 grid grid-cols-12 gap-x-4 md:gap-x-6 w-full" aria-hidden="true">
                     {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="h-full border-r border-[#141414]/[0.03] last:border-r-0" />
+                        <div
+                            key={i}
+                            style={{ transitionDelay: `${i * 35}ms` }}
+                            className="draft-grid-col h-full border-r border-[#141414]/[0.035] last:border-r-0"
+                        />
                     ))}
                 </div>
-                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6">
-                    <div className="col-span-12 lg:col-span-2">
-                        <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)]">
-                            06 //
-                        </span>
+                <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-16 md:py-24 grid grid-cols-12 gap-x-4 md:gap-x-6 relative z-10">
+                    <div className="col-span-12 lg:col-span-2 flex flex-col justify-start mb-6 lg:mb-0">
+                        <div className="lg:sticky lg:top-24 flex flex-col gap-1">
+                            <span className="text-[12px] font-sans font-bold capitalize tracking-[0.08em] text-[var(--accent)] flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                                06 // CONTACT
+                            </span>
+                            <div className="flex flex-row lg:flex-col gap-x-6 gap-y-1 mt-2 lg:mt-3">
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    REF // DISPATCH
+                                </span>
+                                <span className="text-[11px] font-mono text-[#92928E] block">
+                                    AVAILABLE
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Contact Layout (Cols 3-12 on desktop, 1-12 on mobile/tablet) */}
                     <div className="col-span-12 lg:col-span-10 grid grid-cols-12 lg:grid-cols-10 gap-x-4 md:gap-x-6">
-                        <div className="col-span-12 lg:col-span-10 border-b border-[#141414]/15 pb-6 mb-16 lg:mb-24">
+                        <div className="col-span-12 lg:col-span-10 pb-6 mb-16 lg:mb-24 relative">
                             <h2 className="text-[36px] md:text-[56px] lg:text-[80px] font-sans font-extrabold capitalize tracking-[-0.03em] leading-none text-[#141414]">
                                 Contact
                             </h2>
+                            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-[#141414]/10 overflow-hidden" aria-hidden="true">
+                                <div className="draft-line h-full bg-[#141414]/25 relative" />
+                            </div>
                         </div>
 
                         <div className="col-span-12 lg:col-span-10 grid grid-cols-12 gap-x-4 md:gap-x-6 gap-y-8 lg:gap-y-0 mt-8 md:mt-0">
@@ -972,6 +1126,10 @@ export default function HomeV2() {
                         </div>
                     </div>
                 </div>
+
+                <div className="w-full h-[1px] bg-[#141414]/10 relative overflow-hidden" aria-hidden="true">
+                    <div className="draft-line h-full bg-[#141414]/20 relative" />
+                </div>
             </section>
             <footer className="w-full bg-[#F3F2ED] no-print">
                 <div className="max-w-[1440px] mx-auto px-6 md:px-16 py-12 grid grid-cols-12 gap-x-4 md:gap-x-6 border-t border-[#141414]/15 text-[11px] font-mono text-[#92928E] capitalize tracking-wider">
@@ -1032,7 +1190,7 @@ export default function HomeV2() {
                                             <img
                                                 src={img}
                                                 alt={`${selectedProject.title} screenshot ${i + 1}`}
-                                                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300"
+                                                className="w-full h-full object-cover transition-all duration-300"
                                             />
                                         </div>
                                     ))}
