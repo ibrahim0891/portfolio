@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Muhammad Ibrahim — Fullstack Web Developer Dossier",
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="antialiased scroll-smooth">
+    <html lang="en" className="antialiased">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -42,7 +43,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#FAFAF9] text-[#141413] selection:bg-[#E5E5E3] selection:text-black font-sans">
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
